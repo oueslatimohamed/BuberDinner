@@ -1,6 +1,8 @@
 ﻿using BuberDinner.Application.Common.Interfaces.Authentication;
+using BuberDinner.Application.Common.Interfaces.Persistence;
 using BuberDinner.Application.Services.Authentication;
 using BuberDinner.Infrastructure.Authentication;
+using BuberDinner.Infrastructure.Persistance;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +20,8 @@ namespace BuberDinner.Infrastructure
         {
             services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
     }
